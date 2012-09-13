@@ -37,7 +37,7 @@ PImage domegrid;
  */
 void setup() {
   // Load the application settings
-  appSettingsXml.read("appSettings.xml");
+  appSettingsXml.load("appSettings.xml");
   appSettingsXml.setup();
 
   // Create a TestXml class Instance
