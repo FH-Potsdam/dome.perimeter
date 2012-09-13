@@ -129,7 +129,9 @@ class AppSettingsXml {
       
     /* Set the latitude degrees */
     if(settingsXml[3].getName().equals("latitude_degree")) {
-      latitudeDegree = int(settingsXml[3].getContent() );
+      int tempLat = int(settingsXml[3].getContent() );
+      // TODO: /* check if xml content has the correct value */
+      latitudeDegree = tempLat;
       DEBUGINFO("latitudeDegree: " + latitudeDegree);
     } else {
       setDefault_latitudeDegree();
