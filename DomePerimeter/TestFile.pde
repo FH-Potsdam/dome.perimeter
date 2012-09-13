@@ -96,7 +96,7 @@ class TestFile {
       switch(testType){
         case 1:
           shape(shape, 0, 0, scale, scale);
-          fill(bgR,bgG,bgB, transparency);
+          fill(appSettingsXml.bgR,appSettingsXml.bgG,appSettingsXml.bgB, transparency);
           ellipse(scale/2, scale/2, scale+5, scale+5);
           break;
           

@@ -17,18 +17,19 @@
 import processing.opengl.*;
 import processing.xml.*;
 import controlP5.*;
-
-
-
 ControlP5 controlP5;
+
+// The Application Settings managed by appSettingsXml class.
+AppSettingsXml appSettingsXml;
+
 
 PImage domegrid;
 PFont font;
 
-boolean displayInDome;
+/*boolean displayInDome;
 boolean domegridDisplay;
 int bgR = 255, bgG = 255, bgB = 255;
-int latitudeDegree = 10;
+int latitudeDegree = 10;*/
 
 TestObject[] testObject;
 int currentTestRun = 0;
@@ -39,45 +40,13 @@ int currentTestRun = 0;
  * Processing main setup
  */
 void setup(){
-  // Application Settings XML (Load an XML file)
-  XMLElement appXml = new XMLElement(this, "appSettings.xml");
-  // println("Xml: " + appXml);
-  
-  // Get all the child elements from xml file.
-  XMLElement[] settingsXml = appXml.getChildren();
-  //println("displayInDome: " + settingsXml[0].getContent());
-  
-  // set the application variables from xml content.
-  if(settingsXml[0].getContent().equals("true")) {
-    displayInDome = true;
-  } else {
-    displayInDome = false;  
-  }
-  
-  // Set the output resolution
-  if(settingsXml[1].getContent().equals("true")){
-    domegridDisplay = true;
-  } else {
-    domegridDisplay = false;
-  }
-  
-  // Set the background colors
-  bgR = settingsXml[2].getIntAttribute("r");
-  bgG = settingsXml[2].getIntAttribute("g");
-  bgB = settingsXml[2].getIntAttribute("b");
-  
-  // Set the latitude degrees
-  latitudeDegree = int(settingsXml[3].getContent() );
-  //println("latitudeDegree: " + latitudeDegree);
-  
-  // Set the xml testfile path
-  String tempTestFilename = settingsXml[4].getContent();
-  //println(tempTestFilename);
+
+  // Load the application settings  
+  appSettingsXml = new AppSettingsXml();
+  appSettingsXml.read(this, "appSettings.xml");
   
   
-  
-  
-  if(displayInDome == true){
+  if(appSettingsXml.displayInDome == true){
     size(1920, 1920, OPENGL);
   } else {
     size(800, 800, OPENGL);
@@ -93,7 +62,7 @@ void setup(){
   
   
   // Load an XML document
-  XMLElement xml = new XMLElement(this, tempTestFilename);
+  XMLElement xml = new XMLElement(this, appSettingsXml.tempTestFilename);
   println("xml :\n" + xml);
   // get the children of teh <domePerimeter> tag
   XMLElement[] domePerimeterChildren = xml.getChildren();
@@ -142,18 +111,18 @@ void setup(){
   // for this we need slider and buttons.
   controlP5 = new ControlP5(this);
   // Background RGB
-  controlP5.addSlider("BG R", 0,255,bgR, 10,30, 100,14).setId(10);
-  controlP5.addSlider("BG G", 0,255,bgG, 10,50, 100,14).setId(11);
-  controlP5.addSlider("BG B", 0,255,bgB, 10,70, 100,14).setId(12);
+  controlP5.addSlider("BG R", 0,255,appSettingsXml.bgR, 10,30, 100,14).setId(10);
+  controlP5.addSlider("BG G", 0,255,appSettingsXml.bgG, 10,50, 100,14).setId(11);
+  controlP5.addSlider("BG B", 0,255,appSettingsXml.bgB, 10,70, 100,14).setId(12);
   // Dome Grid
-  controlP5.addToggle("DOMEGRID", domegridDisplay, 10,90, 14,14).setId(20);
+  controlP5.addToggle("DOMEGRID", appSettingsXml.domegridDisplay, 10,90, 14,14).setId(20);
   // TEST PARAMETER
   controlP5.addSlider("TRANSPARENCY", 0,255,testObject[0].testFile[0].transparency, 10,height-120, 100,14).setId(30);
   controlP5.addSlider("SCALE", 0,255,testObject[0].testFile[0].scale, 10,height-100, 100,14).setId(31);
   controlP5.addSlider("ROTATE_LEFT", -180,180,testObject[0].testFile[0].rotation, 10,height-80, 100,14).setId(320);
   controlP5.addSlider("ROTATE_MIDDLE", -180,180,testObject[0].testFile[1].rotation, 10,height-60, 100,14).setId(321);
   controlP5.addSlider("ROTATE_RIGHT", -180,180,testObject[0].testFile[2].rotation, 10,height-40, 100,14).setId(322);
-  controlP5.addSlider("LATITUDE_DEGREE", 0,90,latitudeDegree, 10,height-20, 100,14).setId(33);
+  controlP5.addSlider("LATITUDE_DEGREE", 0,90,appSettingsXml.latitudeDegree, 10,height-20, 100,14).setId(33);
   // Test
   controlP5.addButton("PREV", 0, width-120,height-30, 50,14).setId(40);
   controlP5.addButton("NEXT", 0, width-60,height-30, 50,14).setId(41);
@@ -171,12 +140,12 @@ void setup(){
  */
 void draw(){
   background(20);
-  if(domegridDisplay == true) {
-    tint(bgR, bgG, bgB);
+  if(appSettingsXml.domegridDisplay == true) {
+    tint(appSettingsXml.bgR, appSettingsXml.bgG, appSettingsXml.bgB);
     image(domegrid, 0, 0, width, height);
     noTint();
   } else {
-    fill(bgR, bgG, bgB);
+    fill(appSettingsXml.bgR, appSettingsXml.bgG, appSettingsXml.bgB);
     ellipse(width/2, height/2, width, height);
   }
   
@@ -188,7 +157,7 @@ void draw(){
   text("FrameRate: "+(int)frameRate+"\nFrameCount: "+frameCount, width-120, 20);
   text("TEST-RUN NO: "+currentTestRun, width-120, height-40);
   
-  testObject[currentTestRun].display(latitudeDegree);
+  testObject[currentTestRun].display(appSettingsXml.latitudeDegree);
 }
 
 
@@ -222,18 +191,18 @@ public void controlEvent(ControlEvent theEvent) {
       testObject[currentTestRun].testFile[2].rotation = (int)(theEvent.controller().value());
       break;
     case(33):
-      latitudeDegree = (int)(theEvent.controller().value());
+      appSettingsXml.latitudeDegree = (int)(theEvent.controller().value());
       break;
     
     // BG Transparency, Scale, Rotation
     case(10):
-      bgR = (int)(theEvent.controller().value());
+      appSettingsXml.bgR = (int)(theEvent.controller().value());
       break;
     case(11):
-      bgG = (int)(theEvent.controller().value());
+      appSettingsXml.bgG = (int)(theEvent.controller().value());
       break;
     case(12):
-      bgB = (int)(theEvent.controller().value());
+      appSettingsXml.bgB = (int)(theEvent.controller().value());
       break;
     
     // Domwrid display  
@@ -241,8 +210,8 @@ public void controlEvent(ControlEvent theEvent) {
       int tempVar;
       tempVar = (int)(theEvent.controller().value());
       //println(tempVar);
-      if(tempVar == 0) domegridDisplay = false;
-      else domegridDisplay = true;
+      if(tempVar == 0) appSettingsXml.domegridDisplay = false;
+      else appSettingsXml.domegridDisplay = true;
       break;
     
     // PREV
