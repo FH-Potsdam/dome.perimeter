@@ -13,21 +13,24 @@
  */
 
 
-
 import processing.opengl.*;
 import processing.xml.*;
 import controlP5.*;
-ControlP5 controlP5;
 
 // The Application Settings managed by appSettingsXml class.
 AppSettingsXml appSettingsXml;
 
-PFont font;
+// GUI to controll the application
+GUI gui;
 
-PImage domegrid;
-
+// TestXml
+TestXml testXml;
 TestObject[] testObject;
 int currentTestRun = 0;
+
+// Other stuff
+PFont font;
+PImage domegrid;
 
 
 
@@ -90,25 +93,9 @@ void setup(){
   }
   
   
-  // Set up the GUI elements
-  // for this we need slider and buttons.
-  controlP5 = new ControlP5(this);
-  // Background RGB
-  controlP5.addSlider("BG R", 0,255,appSettingsXml.backgroundColor[0], 10,30, 100,14).setId(10);
-  controlP5.addSlider("BG G", 0,255,appSettingsXml.backgroundColor[1], 10,50, 100,14).setId(11);
-  controlP5.addSlider("BG B", 0,255,appSettingsXml.backgroundColor[2], 10,70, 100,14).setId(12);
-  // Dome Grid
-  controlP5.addToggle("DOMEGRID", appSettingsXml.domegridDisplay, 10,90, 14,14).setId(20);
-  // TEST PARAMETER
-  controlP5.addSlider("TRANSPARENCY", 0,255,testObject[0].testFile[0].transparency, 10,height-120, 100,14).setId(30);
-  controlP5.addSlider("SCALE", 0,255,testObject[0].testFile[0].scale, 10,height-100, 100,14).setId(31);
-  controlP5.addSlider("ROTATE_LEFT", -180,180,testObject[0].testFile[0].rotation, 10,height-80, 100,14).setId(320);
-  controlP5.addSlider("ROTATE_MIDDLE", -180,180,testObject[0].testFile[1].rotation, 10,height-60, 100,14).setId(321);
-  controlP5.addSlider("ROTATE_RIGHT", -180,180,testObject[0].testFile[2].rotation, 10,height-40, 100,14).setId(322);
-  controlP5.addSlider("LATITUDE_DEGREE", 0,90,appSettingsXml.latitudeDegree, 10,height-20, 100,14).setId(33);
-  // Test
-  controlP5.addButton("PREV", 0, width-120,height-30, 50,14).setId(40);
-  controlP5.addButton("NEXT", 0, width-60,height-30, 50,14).setId(41);
+  // Create a GUI class instance
+  gui = new GUI();
+  gui.setup(this);
   
   
   // load the domegrid image
@@ -144,34 +131,54 @@ void draw(){
 }
 
 
+/**
+ * Processing keyPressed
+ */
+ void keyPressed() {
+   switch(key) {
+     case '1':
+       println("key 1 pressed");
+       break;
+     
+     case '2':
+       println("key 2 pressed");
+       break;
+     
+     default:
+       println("default key pressed");
+       break;
+   }
+ }
+ 
+
 
 
 /**
  * controlP5 Events
  */
-public void controlEvent(ControlEvent theEvent) {
+void controlEvent(ControlEvent theEvent) {
   //println("got a control event from controller with id "+theEvent.controller().id());
   
   switch(theEvent.controller().id()){
     // Object RGB
     case(30):
-      testObject[currentTestRun].testFile[0].transparency = (int)(theEvent.controller().value());
-      testObject[currentTestRun].testFile[1].transparency = (int)(theEvent.controller().value());
-      testObject[currentTestRun].testFile[2].transparency = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[0].transparency = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[1].transparency = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[2].transparency = (int)(theEvent.controller().value());
       break;
     case(31):
-      testObject[currentTestRun].testFile[0].scale = (int)(theEvent.controller().value());
-      testObject[currentTestRun].testFile[1].scale = (int)(theEvent.controller().value());
-      testObject[currentTestRun].testFile[2].scale = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[0].scale = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[1].scale = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[2].scale = (int)(theEvent.controller().value());
       break;
     case(320):
-      testObject[currentTestRun].testFile[0].rotation = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[0].rotation = (int)(theEvent.controller().value());
       break;
     case(321):
-      testObject[currentTestRun].testFile[1].rotation = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[1].rotation = (int)(theEvent.controller().value());
       break;
     case(322):
-      testObject[currentTestRun].testFile[2].rotation = (int)(theEvent.controller().value());
+      testObject[currentTestRun].testGraphic[2].rotation = (int)(theEvent.controller().value());
       break;
     case(33):
       appSettingsXml.latitudeDegree = (int)(theEvent.controller().value());
@@ -224,10 +231,6 @@ public void controlEvent(ControlEvent theEvent) {
 
 
 void setControllerValue(){
-  controlP5.controller("TRANSPARENCY").setValue(testObject[currentTestRun].testFile[0].transparency);
-  controlP5.controller("SCALE").setValue(testObject[currentTestRun].testFile[0].scale);
-  controlP5.controller("ROTATE_LEFT").setValue(testObject[currentTestRun].testFile[0].rotation);
-  controlP5.controller("ROTATE_MIDDLE").setValue(testObject[currentTestRun].testFile[1].rotation);
-  controlP5.controller("ROTATE_RIGHT").setValue(testObject[currentTestRun].testFile[2].rotation);
+  gui.setControllerValue();
 }
 
