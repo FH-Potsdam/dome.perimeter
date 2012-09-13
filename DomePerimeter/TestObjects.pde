@@ -1,24 +1,10 @@
 /**
- * Dome.Perimeter is developed by Prof. Dufke
- * Code by Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * 
- * FH-Potsdam
- * University of Applied Science
- *
- * 
- * @processing-version   1.2.1
- * @author               Paul Vollmer
- * @modified             2012.06.09
- * @version              0.1.4c
+ * TestObject
  */
- 
- 
- 
 class TestObject {
 
   // Create 3 TestFile objects for left, middle and right file.
   TestFile[] testFile = new TestFile[3];
-
 
 
   /**
@@ -36,7 +22,6 @@ class TestObject {
   }
   
   
-  
   /**
    * display
    *
@@ -50,7 +35,6 @@ class TestObject {
     testFile[1].display((int)tempPos, 0);
     testFile[2].display((int)tempPos, HALF_PI);
   }
-  
   
 }
 

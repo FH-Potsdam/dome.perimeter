@@ -22,14 +22,9 @@ ControlP5 controlP5;
 // The Application Settings managed by appSettingsXml class.
 AppSettingsXml appSettingsXml;
 
-
-PImage domegrid;
 PFont font;
 
-/*boolean displayInDome;
-boolean domegridDisplay;
-int bgR = 255, bgG = 255, bgB = 255;
-int latitudeDegree = 10;*/
+PImage domegrid;
 
 TestObject[] testObject;
 int currentTestRun = 0;
@@ -40,25 +35,13 @@ int currentTestRun = 0;
  * Processing main setup
  */
 void setup(){
-
   // Load the application settings  
   appSettingsXml = new AppSettingsXml();
   appSettingsXml.read(this, "appSettings.xml");
+  appSettingsXml.setup();
   
-  
-  if(appSettingsXml.displayInDome == true){
-    size(1920, 1920, OPENGL);
-  } else {
-    size(800, 800, OPENGL);
-  }
-  frameRate(30);
-  smooth();
-  
-  
-  
-  // load a font for information
+  // load a font for informations and other text stuff
   font = loadFont("font/Unibody8-Regular.vlw");
-  
   
   
   // Load an XML document
@@ -111,9 +94,9 @@ void setup(){
   // for this we need slider and buttons.
   controlP5 = new ControlP5(this);
   // Background RGB
-  controlP5.addSlider("BG R", 0,255,appSettingsXml.bgR, 10,30, 100,14).setId(10);
-  controlP5.addSlider("BG G", 0,255,appSettingsXml.bgG, 10,50, 100,14).setId(11);
-  controlP5.addSlider("BG B", 0,255,appSettingsXml.bgB, 10,70, 100,14).setId(12);
+  controlP5.addSlider("BG R", 0,255,appSettingsXml.backgroundColor[0], 10,30, 100,14).setId(10);
+  controlP5.addSlider("BG G", 0,255,appSettingsXml.backgroundColor[1], 10,50, 100,14).setId(11);
+  controlP5.addSlider("BG B", 0,255,appSettingsXml.backgroundColor[2], 10,70, 100,14).setId(12);
   // Dome Grid
   controlP5.addToggle("DOMEGRID", appSettingsXml.domegridDisplay, 10,90, 14,14).setId(20);
   // TEST PARAMETER
@@ -141,11 +124,11 @@ void setup(){
 void draw(){
   background(20);
   if(appSettingsXml.domegridDisplay == true) {
-    tint(appSettingsXml.bgR, appSettingsXml.bgG, appSettingsXml.bgB);
+    tint(appSettingsXml.backgroundColor[0], appSettingsXml.backgroundColor[1], appSettingsXml.backgroundColor[2]);
     image(domegrid, 0, 0, width, height);
     noTint();
   } else {
-    fill(appSettingsXml.bgR, appSettingsXml.bgG, appSettingsXml.bgB);
+    fill(appSettingsXml.backgroundColor[0], appSettingsXml.backgroundColor[1], appSettingsXml.backgroundColor[2]);
     ellipse(width/2, height/2, width, height);
   }
   
@@ -196,13 +179,13 @@ public void controlEvent(ControlEvent theEvent) {
     
     // BG Transparency, Scale, Rotation
     case(10):
-      appSettingsXml.bgR = (int)(theEvent.controller().value());
+      appSettingsXml.backgroundColor[0] = (int)(theEvent.controller().value());
       break;
     case(11):
-      appSettingsXml.bgG = (int)(theEvent.controller().value());
+      appSettingsXml.backgroundColor[1] = (int)(theEvent.controller().value());
       break;
     case(12):
-      appSettingsXml.bgB = (int)(theEvent.controller().value());
+      appSettingsXml.backgroundColor[2] = (int)(theEvent.controller().value());
       break;
     
     // Domwrid display  

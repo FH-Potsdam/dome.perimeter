@@ -1,19 +1,6 @@
 /**
- * Dome.Perimeter is developed by Prof. Dufke
- * Code by Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * 
- * FH-Potsdam
- * University of Applied Science
- *
- * 
- * @processing-version   1.2.1
- * @author               Paul Vollmer
- * @modified             2012.06.09
- * @version              0.1.4c
+ * TestFile
  */
- 
- 
- 
 class TestFile {
   
   // if our file is a SVG file, we set the testType integer to 1
@@ -28,7 +15,6 @@ class TestFile {
   int transparency;
   int scale;
   int rotation;
-  
   
   
   /**
@@ -96,7 +82,7 @@ class TestFile {
       switch(testType){
         case 1:
           shape(shape, 0, 0, scale, scale);
-          fill(appSettingsXml.bgR,appSettingsXml.bgG,appSettingsXml.bgB, transparency);
+          fill(appSettingsXml.backgroundColor[0], appSettingsXml.backgroundColor[1], appSettingsXml.backgroundColor[2], transparency);
           ellipse(scale/2, scale/2, scale+5, scale+5);
           break;
           
