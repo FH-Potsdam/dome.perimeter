@@ -20,22 +20,22 @@ class TestXml {
    * Load a test file
    */
   void load(PApplet p, String file) {
-    println("[TestXml] load() file = " + file);
-
+    DEBUGINFO("load() file = " + file);
+    
     // Load an XML document
     XMLElement xml = new XMLElement(p, file);
-    println("xml :\n" + xml);
+    DEBUGINFO("xml :\n" + xml);
     // get the children of teh <domePerimeter> tag
     XMLElement[] domePerimeterChildren = xml.getChildren();
 
     // Get all the child elements
     XMLElement[] children = domePerimeterChildren[0].getChildren();
-    println("children.length: "+children.length);
+    DEBUGINFO("children.length: "+children.length);
     // Set the array size of TestObject
     testObject = new TestObject[children.length];
 
     for (int i=0; i<children.length; i++ ) {
-      //println("children: " + children[i]);
+      DEBUGINFO("children: " + children[i]);
 
       // create child for left, middle, right tag.
       XMLElement leftElement = children[i].getChild(0);
@@ -61,6 +61,14 @@ class TestXml {
 
       testObject[i] = new TestObject(tempSrc, tempT, tempS, tempR);
     }
+  }
+  
+  
+  /**
+   * This will be used for debugging stuff.
+   */
+  void DEBUGINFO(String s){
+    //println("[TestXml] " + s);
   }
 }
 

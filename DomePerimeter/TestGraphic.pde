@@ -30,17 +30,21 @@ class TestGraphic {
    *        rotation of the file
    */
   TestGraphic(String src, int transparency, int scale, int rotation) {
+    DEBUGINFO("Constuctor");
+    
     String[] temp = split(src, ".");
-    //println(temp[temp.length-1]);
+    //DEBUGINFO(temp[temp.length-1]);
 
     // Check if the file is a SVG type.
     if(temp[temp.length-1].equals("svg")) {
-      //println("VECTOR");
+      DEBUGINFO("VECTOR");
       shape = loadShape(src);
       testType = 1;
     }
-    else if(temp[temp.length-1].equals("png") || temp[temp.length-1].equals("jpg") || temp[temp.length-1].equals("tif")) {
-      //println("PIXEL");
+    else if(temp[temp.length-1].equals("png") ||
+            temp[temp.length-1].equals("jpg") ||
+            temp[temp.length-1].equals("tif")) {
+      DEBUGINFO("PIXEL");
       image = loadImage(src);
       testType = 2;
     }
@@ -49,11 +53,11 @@ class TestGraphic {
     this.scale = scale;
     this.rotation = rotation;
 
-    println("[TestObject] src = " + src +
-      "\t, transparency = " + transparency +
-      "\t, scale = " + scale +
-      "\t, rotation = " + rotation +
-      "\t, testType = " + testType + " [" + temp[temp.length-1] + "]");
+    DEBUGINFO("src = " + src +
+              "\t, transparency = " + transparency +
+              "\t, scale = " + scale +
+              "\t, rotation = " + rotation +
+              "\t, testType = " + testType + " [" + temp[temp.length-1] + "]");
   }
 
 
@@ -70,7 +74,7 @@ class TestGraphic {
     // Calculate position
     float x = rad * sin(radians(rotation));
     float y = rad * cos(radians(rotation));
-    //println("rotation: " + rotation + " , x: " + x + " ___________ y: " + y);
+    DEBUGINFO("rotation: " + rotation + ",\t x: " + x + ",\t y: " + y);
 
     pushMatrix();
     translate(x+width/2, y+height/2);
@@ -93,10 +97,18 @@ class TestGraphic {
       break;
 
     default:
-      println("Something went wrong :(");
+      DEBUGINFO("Something went wrong :(");
     }
 
     popMatrix();
+  }
+  
+  
+  /**
+   * This will be used for debugging stuff.
+   */
+  void DEBUGINFO(String s){
+    //println("[TestGraphic] " + s);
   }
 }
 

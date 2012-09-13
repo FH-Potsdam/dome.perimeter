@@ -1,5 +1,5 @@
 /**
- * AppSettings
+ * AppSettingsXml
  *
  * Die classe wird benutzt um die app settings zu verwalten.
  * es wird eine xml datei eingelesen und die tags/attributes geparsed.
@@ -35,21 +35,23 @@ class AppSettingsXml {
    * @param file The Xml file
    */
   void load(String file) {
+    DEBUGINFO("load()");
+    
     /* check if the file exist */
     File f = new File(dataPath(file));
     if (f.exists()) {
-      println("[AppSettings] File exist");
+      DEBUGINFO("File exist");
       
       /* Application Settings XML (Load an XML file) */
       XMLElement appXml = new XMLElement(p5, file);
-      //println("[AppSettings] XML\n" + appXml);
+      DEBUGINFO("XML\n" + appXml);
       
       /* Read the xml content */
       read(appXml);
     }
     /* if no file exist... */
     else {
-      println("[AppSettings] File does not exist");
+      DEBUGINFO("File does not exist");
       setDefault();
     } /* End if file exists */
   }
@@ -59,6 +61,7 @@ class AppSettingsXml {
    * setup
    */
   void setup() {
+    DEBUGINFO("setup()");
     // Set Processing settings
     if(displayInDome == true) {
       size(1920, 1920, OPENGL);
@@ -74,20 +77,22 @@ class AppSettingsXml {
    * read
    */
   void read(XMLElement xml){
+    DEBUGINFO("read()");
+    
     /* Get all the child elements from xml file. */
     XMLElement[] settingsXml = xml.getChildren();
       
     /* Set the application variables from xml content. */
     /* If displayInDome tag exists */
    if(settingsXml[0].getName().equals("displayInDome")) {
-      //println("[AppSettings] displayInDome tag ok");
+      DEBUGINFO("displayInDome tag ok");
       if(settingsXml[0].getContent().equals("true")) {
         displayInDome = true;
      } else {
         displayInDome = false;
       }
     } else {
-      //println("[AppSettings] displayInDome tag not found");
+      DEBUGINFO("displayInDome tag not found");
       setDefault_displayInDome();
     }
 
@@ -114,7 +119,7 @@ class AppSettingsXml {
     /* Set the latitude degrees */
     if(settingsXml[3].getName().equals("latitude_degree")) {
       latitudeDegree = int(settingsXml[3].getContent() );
-      //println("[AppSettings] latitudeDegree: " + latitudeDegree);
+      DEBUGINFO("latitudeDegree: " + latitudeDegree);
     } else {
       setDefault_latitudeDegree();
     }
@@ -122,7 +127,7 @@ class AppSettingsXml {
     /* Set the xml testfile path */
     if(settingsXml[4].getName().equals("testFile")) {
       testFile = settingsXml[4].getContent();
-      //println("[AppSettings] " + testFile);
+      DEBUGINFO(testFile);
     } else {
       setDefault_testFile();
     }
@@ -157,6 +162,13 @@ class AppSettingsXml {
     testFile = selectInput();
   }
   
+  
+  /**
+   * This will be used for debugging stuff.
+   */
+  void DEBUGINFO(String s){
+    //println("[AppSettings] " + s);
+  }
   
 }
 
