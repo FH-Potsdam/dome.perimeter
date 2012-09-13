@@ -17,8 +17,9 @@ import processing.opengl.*;
 import processing.xml.*;
 import controlP5.*;
 
+
 // The Application Settings managed by appSettingsXml class.
-AppSettingsXml appSettingsXml = new AppSettingsXml(this);
+AppSettingsXml appSettingsXml = new AppSettingsXml();
 
 // GUI to controll the application
 GUI gui;
@@ -37,19 +38,19 @@ PImage domegrid;
  */
 void setup() {
   // Load the application settings
-  appSettingsXml.load("appSettings.xml");
+  appSettingsXml.load(this, "appSettings.xml");
   appSettingsXml.setup();
-
-  // Create a TestXml class Instance
+  
+  /* Create a TestXml class Instance */
   testXml.load(this, appSettingsXml.testFile);
 
-  // Create a GUI class instance
+  /* Create a GUI class instance */
   gui = new GUI();
   gui.setup(this);
 
-  // load a font for informations and other text stuff
+  /* load a font for informations and other text stuff */
   font = loadFont("font/Unibody8-Regular.vlw");
-  // load the domegrid image
+  /* load the domegrid image */
   domegrid = loadImage("domegrid/domegrid.png");
 }
 
@@ -71,7 +72,7 @@ void draw() {
     ellipse(width/2, height/2, width, height);
   }
 
-  // Typo für gui beschreibung, test ergebniss etc.
+  /* Typo für gui beschreibung, test ergebniss etc. */
   fill(255);
   textFont(font);
   text("BACKGROUND COLOR:", 10, 20);
@@ -112,7 +113,7 @@ void controlEvent(ControlEvent theEvent) {
   //println("got a control event from controller with id "+theEvent.controller().id());
 
   switch(theEvent.controller().id()) {
-    // Object RGB
+    /* Object RGB */
     case(30):
     testXml.testObject[testXml.currentTestRun].testGraphic[0].transparency = (int)(theEvent.controller().value());
     testXml.testObject[testXml.currentTestRun].testGraphic[1].transparency = (int)(theEvent.controller().value());

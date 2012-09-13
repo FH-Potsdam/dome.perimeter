@@ -9,7 +9,6 @@ class AppSettingsXml {
   /**
    * Variables
    */
-  PApplet p5;
   boolean displayInDome;
   boolean domegridDisplay;
   int[] backgroundColor = new int[3];
@@ -20,8 +19,7 @@ class AppSettingsXml {
   /**
    * Constuctor
    */
-  AppSettingsXml(PApplet p) {
-    p5 = p;
+  AppSettingsXml() {
     backgroundColor[0] = 255;
     backgroundColor[1] = 255;
     backgroundColor[2] = 255;
@@ -34,7 +32,7 @@ class AppSettingsXml {
    *
    * @param file The Xml file
    */
-  void load(String file) {
+  void load(PApplet p, String file) {
     DEBUGINFO("load()");
     
     /* check if the file exist */
@@ -43,7 +41,7 @@ class AppSettingsXml {
       DEBUGINFO("File exist");
       
       /* Application Settings XML (Load an XML file) */
-      XMLElement appXml = new XMLElement(p5, file);
+      XMLElement appXml = new XMLElement(p, file);
       DEBUGINFO("XML\n" + appXml);
       
       /* Read the xml content */
@@ -55,14 +53,13 @@ class AppSettingsXml {
       setDefault();
     } /* End if file exists */
   }
-
-
-  /**
+  
+  
+  /** 
    * setup
    */
-  void setup() {
+  void setup(){
     DEBUGINFO("setup()");
-    // Set Processing settings
     if(displayInDome == true) {
       size(1920, 1920, OPENGL);
     } else {
@@ -83,16 +80,15 @@ class AppSettingsXml {
     XMLElement[] settingsXml = xml.getChildren();
       
     /* Set the application variables from xml content. */
+    
     /* If displayInDome tag exists */
    if(settingsXml[0].getName().equals("displayInDome")) {
-      DEBUGINFO("displayInDome tag ok");
       if(settingsXml[0].getContent().equals("true")) {
         displayInDome = true;
      } else {
         displayInDome = false;
       }
     } else {
-      DEBUGINFO("displayInDome tag not found");
       setDefault_displayInDome();
     }
 
@@ -109,10 +105,25 @@ class AppSettingsXml {
       
     /* Set the background colors */
     if(settingsXml[2].getName().equals("backgroundColor")) {
-      backgroundColor[0] = settingsXml[2].getIntAttribute("r");
-      backgroundColor[1] = settingsXml[2].getIntAttribute("g");
-      backgroundColor[2] = settingsXml[2].getIntAttribute("b");
-    } else {
+      /* save the r, g, b attribute value to temporary variable */
+      int tempR = settingsXml[2].getIntAttribute("r");
+      int tempG = settingsXml[2].getIntAttribute("g");
+      int tempB = settingsXml[2].getIntAttribute("b");
+      
+      /* check if the integer is smaller than 255 */
+      if(tempR <= 255) backgroundColor[0] = tempR;
+      else if(tempR > 0) backgroundColor[0] = 0;
+      else backgroundColor[0] = 255;
+      
+      if(tempG <= 255) backgroundColor[1] = tempG;
+      else if(tempG > 0) backgroundColor[1] = 0;
+      else backgroundColor[1] = 255;
+      
+      if(tempB <= 255) backgroundColor[2] = tempB;
+      else if(tempB > 0) backgroundColor[2] = 0;
+      else backgroundColor[2] = 255;
+    }
+    else {
       setDefault_backgroundColor();
     }
       
