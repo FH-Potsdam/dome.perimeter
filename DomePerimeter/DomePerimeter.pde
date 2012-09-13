@@ -95,9 +95,12 @@ void setup(){
   // Load an XML document
   XMLElement xml = new XMLElement(this, tempTestFilename);
   println("xml :\n" + xml);
+  // get the children of teh <domePerimeter> tag
+  XMLElement[] domePerimeterChildren = xml.getChildren();
+  
   // Get all the child elements
-  XMLElement[] children = xml.getChildren();
-  //println("children.length: "+children.length);
+  XMLElement[] children = domePerimeterChildren[0].getChildren();
+  println("children.length: "+children.length);
   // Set the array size of TestObject
   testObject = new TestObject[children.length];
   
