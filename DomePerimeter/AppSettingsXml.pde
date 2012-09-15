@@ -33,7 +33,7 @@ class AppSettingsXml {
    *
    * @param file The Xml file
    */
-  void load(PApplet p, String file) {
+  void load(String file) {
     DEBUGINFO("load()");
     
     /* check if the file exist */
@@ -42,11 +42,11 @@ class AppSettingsXml {
       DEBUGINFO("File exist");
       
       /* Application Settings XML (Load an XML file) */
-      XMLElement appXml = new XMLElement(p, file);
-      DEBUGINFO("XML\n" + appXml);
+      XML xml = loadXML(file);
+      DEBUGINFO("XML\n" + xml);
       
       /* Read the xml content */
-      read(appXml);
+      read(xml);
     }
     /* if no file exist... */
     else {
@@ -74,11 +74,11 @@ class AppSettingsXml {
   /**
    * read
    */
-  void read(XMLElement xml){
+  void read(XML xml){
     DEBUGINFO("read()");
     
     /* Get all the child elements from xml file. */
-    XMLElement[] settingsXml = xml.getChildren();
+    XML[] settingsXml = xml.getChildren();
     
     /* Set the application variables from xml content. */
     
@@ -98,7 +98,7 @@ class AppSettingsXml {
       /* Get the filepath */
       domegridPath = settingsXml[1].getContent();
       /* check if display is true. */
-      if(settingsXml[1].getStringAttribute("display").equals("true")) {
+      if(settingsXml[1].getString("display").equals("true")) {
         domegridDisplay = true;
       } else {
         domegridDisplay = false;
@@ -111,9 +111,9 @@ class AppSettingsXml {
     /* Set the background colors */
     if(settingsXml[2].getName().equals("backgroundColor")) {
       /* save the r, g, b attribute value to temporary variable */
-      int tempR = settingsXml[2].getIntAttribute("r");
-      int tempG = settingsXml[2].getIntAttribute("g");
-      int tempB = settingsXml[2].getIntAttribute("b");
+      int tempR = settingsXml[2].getInt("r");
+      int tempG = settingsXml[2].getInt("g");
+      int tempB = settingsXml[2].getInt("b");
       
       /* check if the integer is smaller than 255 */
       if(tempR <= 255) backgroundColor[0] = tempR;
@@ -177,7 +177,8 @@ class AppSettingsXml {
     latitudeDegree = 10;
   }
   void setDefault_testFile(){
-    testFile = selectInput();
+    //selectInput("test", "test");
+    //testFile = "";
   }
   
   
@@ -185,7 +186,7 @@ class AppSettingsXml {
    * This will be used for debugging stuff.
    */
   void DEBUGINFO(String s){
-    //println("[AppSettings] " + s);
+    println("[AppSettings] " + s);
   }
   
 }
