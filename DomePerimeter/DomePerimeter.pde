@@ -14,7 +14,6 @@
 
 
 import processing.opengl.*;
-import processing.xml.*;
 //import processing.xml.*;
 import controlP5.*;
 
@@ -39,11 +38,11 @@ PImage domegrid;
  */
 void setup() {
   // Load the application settings
-  appSettingsXml.load(this, "appSettings.xml");
+  appSettingsXml.load("appSettings.xml");
   appSettingsXml.setup();
   
   /* Create a TestXml class Instance */
-  testXml.load(this, appSettingsXml.testFile);
+  testXml.load(appSettingsXml.testFile);
 
   /* Create a GUI class instance */
   gui = new GUI();
