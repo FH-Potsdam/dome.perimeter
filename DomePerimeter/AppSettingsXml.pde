@@ -62,9 +62,9 @@ class AppSettingsXml {
   void setup(){
     DEBUGINFO("setup()");
     if(displayInDome == true) {
-      size(1920, 1920, OPENGL);
+      size(1920, 1920);
     } else {
-      size(800, 800, OPENGL);
+      size(800, 800);
     }
     frameRate(30);
     smooth();
@@ -77,14 +77,12 @@ class AppSettingsXml {
   void read(XML xml){
     DEBUGINFO("read()");
     
-    /* Get all the child elements from xml file. */
-    XML[] settingsXml = xml.getChildren();
-    
     /* Set the application variables from xml content. */
     
+    XML[] displayInDomeTag = xml.getChildren("displayInDome");
     /* If displayInDome tag exists */
-   if(settingsXml[0].getName().equals("displayInDome")) {
-      if(settingsXml[0].getContent().equals("true")) {
+    if(displayInDomeTag.length == 1) {
+      if(displayInDomeTag[0].getContent().equals("true")) {
         displayInDome = true;
      } else {
         displayInDome = false;
@@ -94,26 +92,27 @@ class AppSettingsXml {
     }
 
     /* Set the output resolution */
-    if(settingsXml[1].getName().equals("domegrid")) {
+    XML[] domegridTag = xml.getChildren("domegrid");
+    if(domegridTag.length == 1) {
       /* Get the filepath */
-      domegridPath = settingsXml[1].getContent();
+      domegridPath = domegridTag[0].getContent();
       /* check if display is true. */
-      if(settingsXml[1].getString("display").equals("true")) {
+      if(domegridTag[0].getString("display").equals("true")) {
         domegridDisplay = true;
       } else {
         domegridDisplay = false;
       }
-      //println("######### " + settingsXml[1].getStringAttribute("display"));
     } else {
       setDefault_domegridDisplay();
     }
       
     /* Set the background colors */
-    if(settingsXml[2].getName().equals("backgroundColor")) {
+    XML[] backgroundColorTag = xml.getChildren("backgroundColor");
+    if(backgroundColorTag.length == 1) {
       /* save the r, g, b attribute value to temporary variable */
-      int tempR = settingsXml[2].getInt("r");
-      int tempG = settingsXml[2].getInt("g");
-      int tempB = settingsXml[2].getInt("b");
+      int tempR = backgroundColorTag[0].getInt("r");
+      int tempG = backgroundColorTag[0].getInt("g");
+      int tempB = backgroundColorTag[0].getInt("b");
       
       /* check if the integer is smaller than 255 */
       if(tempR <= 255) backgroundColor[0] = tempR;
@@ -133,8 +132,9 @@ class AppSettingsXml {
     }
       
     /* Set the latitude degrees */
-    if(settingsXml[3].getName().equals("latitude_degree")) {
-      int tempLat = int(settingsXml[3].getContent() );
+    XML[] latitude_degreeTag = xml.getChildren("latitude_degree");
+    if(latitude_degreeTag.length == 1) {
+      int tempLat = int(latitude_degreeTag[0].getContent() );
       // TODO: /* check if xml content has the correct value */
       latitudeDegree = tempLat;
       DEBUGINFO("latitudeDegree: " + latitudeDegree);
@@ -143,8 +143,9 @@ class AppSettingsXml {
     }
       
     /* Set the xml testfile path */
-    if(settingsXml[4].getName().equals("testFile")) {
-      testFile = settingsXml[4].getContent();
+    XML[] testFileTag = xml.getChildren("testFile");
+    if(testFileTag.length == 1) {
+      testFile = testFileTag[0].getContent();
       DEBUGINFO(testFile);
     } else {
       setDefault_testFile();
