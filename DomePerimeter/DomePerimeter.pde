@@ -8,8 +8,8 @@
  * 
  * @processing-version   1.2.1
  * @author               Paul Vollmer
- * @modified             2012.09.13
- * @version              0.1.4d
+ * @modified             2012.09.15
+ * @version              0.1.4d2
  */
 
 
@@ -51,7 +51,7 @@ void setup() {
   /* load a font for informations and other text stuff */
   font = loadFont("font/Unibody8-Regular.vlw");
   /* load the domegrid image */
-  domegrid = loadImage("domegrid/domegrid.png");
+  domegrid = loadImage(appSettingsXml.domegridPath);
 }
 
 
@@ -77,7 +77,7 @@ void draw() {
   textFont(font);
   text("BACKGROUND COLOR:", 10, 20);
   text("TEST PARAMETER:", 10, height-130);
-  text("FrameRate: "+(int)frameRate+"\nFrameCount: "+frameCount, width-120, 20);
+  text("FRAMERATE: "+(int)frameRate+"\nFRAMECOUNT: "+frameCount, width-120, 20);
   text("TEST-RUN NO: "+testXml.currentTestRun, width-120, height-40);
 
   testXml.testObject[testXml.currentTestRun].display(appSettingsXml.latitudeDegree);

@@ -11,6 +11,7 @@ class AppSettingsXml {
    */
   boolean displayInDome;
   boolean domegridDisplay;
+  String domegridPath;
   int[] backgroundColor = new int[3];
   int latitudeDegree;
   String testFile;
@@ -78,7 +79,7 @@ class AppSettingsXml {
     
     /* Get all the child elements from xml file. */
     XMLElement[] settingsXml = xml.getChildren();
-      
+    
     /* Set the application variables from xml content. */
     
     /* If displayInDome tag exists */
@@ -93,12 +94,16 @@ class AppSettingsXml {
     }
 
     /* Set the output resolution */
-    if(settingsXml[1].getName().equals("displayDomegrid")) {
-      if(settingsXml[1].getContent().equals("true")) {
+    if(settingsXml[1].getName().equals("domegrid")) {
+      /* Get the filepath */
+      domegridPath = settingsXml[1].getContent();
+      /* check if display is true. */
+      if(settingsXml[1].getStringAttribute("display").equals("true")) {
         domegridDisplay = true;
       } else {
         domegridDisplay = false;
       }
+      //println("######### " + settingsXml[1].getStringAttribute("display"));
     } else {
       setDefault_domegridDisplay();
     }
