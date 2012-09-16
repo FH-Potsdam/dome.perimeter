@@ -49,16 +49,22 @@ class GUI {
   /**
    * setControllerValue
    */
-  void setControllerValue() {
+  void setControllerValue(int currentTestRun) {
     DEBUGINFO("setControllerValue()");
     
-    controlP5.controller("TRANSPARENCY").setValue(testXml.testObject[testXml.currentTestRun].testGraphic[0].transparency);
-    controlP5.controller("SCALE").setValue(testXml.testObject[testXml.currentTestRun].testGraphic[0].scale);
-    controlP5.controller("ROTATE_LEFT").setValue(testXml.testObject[testXml.currentTestRun].testGraphic[0].rotation);
-    controlP5.controller("ROTATE_MIDDLE").setValue(testXml.testObject[testXml.currentTestRun].testGraphic[1].rotation);
-    controlP5.controller("ROTATE_RIGHT").setValue(testXml.testObject[testXml.currentTestRun].testGraphic[2].rotation);
+    controlP5.controller("TRANSPARENCY").setValue(testXml.testObject[currentTestRun].testGraphic[0].transparency);
+    controlP5.controller("SCALE").setValue(testXml.testObject[currentTestRun].testGraphic[0].scale);
+    controlP5.controller("ROTATE_LEFT").setValue(testXml.testObject[currentTestRun].testGraphic[0].rotation);
+    controlP5.controller("ROTATE_MIDDLE").setValue(testXml.testObject[currentTestRun].testGraphic[1].rotation);
+    controlP5.controller("ROTATE_RIGHT").setValue(testXml.testObject[currentTestRun].testGraphic[2].rotation);
   }
   
+  
+  
+void setDomegridValue(float f){
+    controlP5.controller("DOMEGRID").setValue(f);
+
+}
   
   /**
    * This will be used for debugging stuff.

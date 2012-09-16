@@ -12,9 +12,6 @@
  * @version              0.1.41a
  */
 
-
-import processing.opengl.*;
-//import processing.xml.*;
 import controlP5.*;
 
 
@@ -26,6 +23,8 @@ GUI gui;
 
 // TestXml
 TestXml testXml = new TestXml();
+
+int currentTestRun = 0;
 
 // Other stuff
 PFont font;
@@ -47,7 +46,7 @@ void setup() {
   /* Create a GUI class instance */
   gui = new GUI();
   gui.setup(this);
-
+    
   /* load a font for informations and other text stuff */
   font = loadFont("font/Unibody8-Regular.vlw");
   /* load the domegrid image */
@@ -78,9 +77,10 @@ void draw() {
   text("BACKGROUND COLOR:", 10, 20);
   text("TEST PARAMETER:", 10, height-130);
   text("FRAMERATE: "+(int)frameRate+"\nFRAMECOUNT: "+frameCount, width-120, 20);
-  text("TEST-RUN NO: "+testXml.currentTestRun, width-120, height-40);
+  text("TEST-RUN NO: "+currentTestRun, width-120, height-40);
 
-  testXml.testObject[testXml.currentTestRun].display(appSettingsXml.latitudeDegree);
+  testXml.testObject[currentTestRun].display(appSettingsXml.latitudeDegree);
+  //println(testXml.testObject.length);
 }
 
 
@@ -88,13 +88,26 @@ void draw() {
  * Processing keyPressed
  */
 void keyPressed() {
+  println("key " + key + " pressed");
+  
   switch(key) {
-  case '1':
-    println("key 1 pressed");
+  /* Domegrid on/off */
+  case 'q':
+    if(appSettingsXml.domegridDisplay == true) {
+      appSettingsXml.domegridDisplay = false;
+      gui.setDomegridValue(0);
+    } else if(appSettingsXml.domegridDisplay == false) {
+      appSettingsXml.domegridDisplay = true;
+      gui.setDomegridValue(1);
+    }
+    break;
+
+  /* Next Run */
+  case '9':
+  currentTestRun++;
     break;
 
   case '2':
-    println("key 2 pressed");
     break;
 
   default:
@@ -104,6 +117,17 @@ void keyPressed() {
 }
 
 
+/**
+ * fileSelected
+ */
+void fileSelected(File selection) {
+  if (selection == null) {
+    println("Window was closed or the user hit cancel.");
+  } 
+  else {
+    println("User selected " + selection.getAbsolutePath());
+  }
+}
 
 
 /**
@@ -115,23 +139,23 @@ void controlEvent(ControlEvent theEvent) {
   switch(theEvent.controller().id()) {
     /* Object RGB */
     case(30):
-    testXml.testObject[testXml.currentTestRun].testGraphic[0].transparency = (int)(theEvent.controller().value());
-    testXml.testObject[testXml.currentTestRun].testGraphic[1].transparency = (int)(theEvent.controller().value());
-    testXml.testObject[testXml.currentTestRun].testGraphic[2].transparency = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[0].transparency = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[1].transparency = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[2].transparency = (int)(theEvent.controller().value());
     break;
     case(31):
-    testXml.testObject[testXml.currentTestRun].testGraphic[0].scale = (int)(theEvent.controller().value());
-    testXml.testObject[testXml.currentTestRun].testGraphic[1].scale = (int)(theEvent.controller().value());
-    testXml.testObject[testXml.currentTestRun].testGraphic[2].scale = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[0].scale = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[1].scale = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[2].scale = (int)(theEvent.controller().value());
     break;
     case(320):
-    testXml.testObject[testXml.currentTestRun].testGraphic[0].rotation = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[0].rotation = (int)(theEvent.controller().value());
     break;
     case(321):
-    testXml.testObject[testXml.currentTestRun].testGraphic[1].rotation = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[1].rotation = (int)(theEvent.controller().value());
     break;
     case(322):
-    testXml.testObject[testXml.currentTestRun].testGraphic[2].rotation = (int)(theEvent.controller().value());
+    testXml.testObject[currentTestRun].testGraphic[2].rotation = (int)(theEvent.controller().value());
     break;
     case(33):
     appSettingsXml.latitudeDegree = (int)(theEvent.controller().value());
@@ -159,25 +183,25 @@ void controlEvent(ControlEvent theEvent) {
 
     // PREV
     case(40):
-    if(testXml.currentTestRun <= 0) {
-      println(testXml.currentTestRun);
+    if(currentTestRun <= 0) {
+      println(currentTestRun);
     } 
     else {
-      testXml.currentTestRun--;
-      setControllerValue();
-      println(testXml.currentTestRun);
+      currentTestRun--;
+      //setControllerValue();
+      println(currentTestRun);
     }
     break;
 
     // NEXT
     case(41):
-    if(testXml.currentTestRun >= testXml.testObject.length-1) {
-      println(testXml.currentTestRun);
+    if(currentTestRun >= testXml.testObject.length-1) {
+      println(currentTestRun);
     } 
     else {
-      testXml.currentTestRun++;
-      setControllerValue();
-      println(testXml.currentTestRun);
+      currentTestRun++;
+      //setControllerValue();
+      println(currentTestRun);
     }
     break;
   }
@@ -186,6 +210,8 @@ void controlEvent(ControlEvent theEvent) {
 
 
 void setControllerValue() {
-  gui.setControllerValue();
+  gui.setControllerValue(currentTestRun);
+
 }
+
 
