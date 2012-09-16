@@ -4,3 +4,6 @@
 - Master Latitude
 
 - setDefault_testFile selectInput() stuff
+
+
+-´SVG bug at testXml class
