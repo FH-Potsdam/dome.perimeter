@@ -1,0 +1,6 @@
+- DomeMaster Rotate
+
+- Master Scale
+- Master Latitude
+
+- setDefault_testFile selectInput() stuff
