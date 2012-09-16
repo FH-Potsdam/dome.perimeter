@@ -159,6 +159,7 @@ class AppSettingsXml {
   void setDefault(){
     setDefault_displayInDome();
     setDefault_domegridDisplay();
+    setDefault_domegridPath();
     setDefault_backgroundColor();
     setDefault_latitudeDegree();
     setDefault_testFile();
@@ -169,6 +170,9 @@ class AppSettingsXml {
   void setDefault_domegridDisplay(){
     domegridDisplay = true;
   }
+  void setDefault_domegridPath(){
+    domegridPath = "domegrid/domegrid_lat.png";
+  }
   void setDefault_backgroundColor(){
     backgroundColor[0] = 255;
     backgroundColor[1] = 255;
@@ -178,16 +182,15 @@ class AppSettingsXml {
     latitudeDegree = 10;
   }
   void setDefault_testFile(){
-    //selectInput("test", "test");
-    //testFile = "";
+    selectInput("Select a testfile to process:", "fileSelected");
   }
   
-  
+
   /**
    * This will be used for debugging stuff.
    */
   void DEBUGINFO(String s){
-    println("[AppSettings] " + s);
+    //println("[AppSettings] " + s);
   }
   
 }
