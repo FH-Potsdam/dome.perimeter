@@ -49,22 +49,34 @@ class GUI {
   /**
    * setControllerValue
    */
-  void setControllerValue(int currentTestRun) {
+  void setControllerValue(int i){
     DEBUGINFO("setControllerValue()");
-    
-    controlP5.controller("TRANSPARENCY").setValue(testXml.testObject[currentTestRun].testGraphic[0].transparency);
-    controlP5.controller("SCALE").setValue(testXml.testObject[currentTestRun].testGraphic[0].scale);
-    controlP5.controller("ROTATE_LEFT").setValue(testXml.testObject[currentTestRun].testGraphic[0].rotation);
-    controlP5.controller("ROTATE_MIDDLE").setValue(testXml.testObject[currentTestRun].testGraphic[1].rotation);
-    controlP5.controller("ROTATE_RIGHT").setValue(testXml.testObject[currentTestRun].testGraphic[2].rotation);
+    setControllerValueTransparency(i, testXml.testObject[i].testGraphic[0].transparency);
+    setControllerValueScale(i, testXml.testObject[i].testGraphic[0].scale);
+    setControllerValueRotateLeft(i, testXml.testObject[i].testGraphic[0].rotation);
+    setControllerValueRotateMiddle(i, testXml.testObject[i].testGraphic[1].rotation);
+    setControllerValueRotateRight(i, testXml.testObject[i].testGraphic[2].rotation);
+  }
+  void setControllerValueTransparency(int i, float v){
+    controlP5.controller("TRANSPARENCY").setValue(v);
+  }
+  void setControllerValueScale(int i, float v){
+    controlP5.controller("SCALE").setValue(v);
+  }
+  void setControllerValueRotateLeft(int i, float v){
+    controlP5.controller("ROTATE_LEFT").setValue(v);
+  }
+  void setControllerValueRotateMiddle(int i, float v){
+    controlP5.controller("ROTATE_MIDDLE").setValue(v);
+  }
+  void setControllerValueRotateRight(int i, float v){
+    controlP5.controller("ROTATE_RIGHT").setValue(v);
   }
   
   
-  
-void setDomegridValue(float f){
+  void setDomegridValue(float f){
     controlP5.controller("DOMEGRID").setValue(f);
-
-}
+  }
   
   /**
    * This will be used for debugging stuff.
