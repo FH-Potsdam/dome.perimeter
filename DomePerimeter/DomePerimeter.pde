@@ -104,10 +104,17 @@ void keyPressed() {
 
   /* Next Run */
   case '9':
-  currentTestRun++;
+    if(currentTestRun >= testXml.testObject.length-1) {
+    } else {
+      currentTestRun++;
+    }
     break;
-
-  case '2':
+  /* Previous Run */
+  case '0':
+    if(currentTestRun <= 0){
+    } else {
+      currentTestRun--;
+    }
     break;
 
   default:
