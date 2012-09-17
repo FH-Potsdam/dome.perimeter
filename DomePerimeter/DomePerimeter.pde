@@ -88,7 +88,7 @@ void draw() {
  * Processing keyPressed
  */
 void keyPressed() {
-  println("key " + key + " pressed");
+  //println("key " + key + " pressed");
   
   switch(key) {
   /* Domegrid on/off */
@@ -103,21 +103,54 @@ void keyPressed() {
     break;
   
   /* Rotate Left + */
-  case 'y':
-    testXml.testObject[currentTestRun].testGraphic[0].rotation++;
+  case 'x':
+    if(testXml.testObject[currentTestRun].testGraphic[0].rotation <= 180) {
+      testXml.testObject[currentTestRun].testGraphic[0].rotation++;
+      gui.setControllerValueRotateLeft(currentTestRun, testXml.testObject[currentTestRun].testGraphic[0].rotation);
+      //println("RotateLeft " + testXml.testObject[currentTestRun].testGraphic[0].rotation);
+    }
     break;
   /* Rotate Left - */
-  case 'x':
-    testXml.testObject[currentTestRun].testGraphic[0].rotation--;
+  case 'y':
+    if(testXml.testObject[currentTestRun].testGraphic[0].rotation >= -180){
+      testXml.testObject[currentTestRun].testGraphic[0].rotation--;
+      gui.setControllerValueRotateLeft(currentTestRun, testXml.testObject[currentTestRun].testGraphic[0].rotation);
+      //println("RotateLeft " + testXml.testObject[currentTestRun].testGraphic[0].rotation);
+    }
+    break;
+  
+  /* Rotate Middle + */
+  case 'c':
+    if(testXml.testObject[currentTestRun].testGraphic[1].rotation <= 180) {
+      testXml.testObject[currentTestRun].testGraphic[1].rotation++;
+      gui.setControllerValueRotateMiddle(currentTestRun, testXml.testObject[currentTestRun].testGraphic[1].rotation);
+      println("RotateLeft " + testXml.testObject[currentTestRun].testGraphic[1].rotation);
+    }
+    break;
+  /* Rotate Middle - */
+  case 'v':
+    if(testXml.testObject[currentTestRun].testGraphic[1].rotation >= -180){
+      testXml.testObject[currentTestRun].testGraphic[1].rotation--;
+      gui.setControllerValueRotateMiddle(currentTestRun, testXml.testObject[currentTestRun].testGraphic[1].rotation);
+      println("RotateLeft " + testXml.testObject[currentTestRun].testGraphic[1].rotation);
+    }
     break;
     
   /* Rotate Right + */
-  case 'n':
-    testXml.testObject[currentTestRun].testGraphic[2].rotation++;
+  case 'm':
+    if(testXml.testObject[currentTestRun].testGraphic[2].rotation <= 180) {
+      testXml.testObject[currentTestRun].testGraphic[2].rotation++;
+      gui.setControllerValueRotateRight(currentTestRun, testXml.testObject[currentTestRun].testGraphic[2].rotation);
+      println("RotateLeft " + testXml.testObject[currentTestRun].testGraphic[2].rotation);
+    }
     break;
   /* Rotate Right - */
-  case 'mw':
-    testXml.testObject[currentTestRun].testGraphic[2].rotation--;
+  case 'n':
+    if(testXml.testObject[currentTestRun].testGraphic[2].rotation >= -180){
+      testXml.testObject[currentTestRun].testGraphic[2].rotation--;
+      gui.setControllerValueRotateRight(currentTestRun, testXml.testObject[currentTestRun].testGraphic[2].rotation);
+      println("RotateLeft " + testXml.testObject[currentTestRun].testGraphic[2].rotation);
+    }
     break;
   
   /* Next Run */
@@ -209,7 +242,7 @@ void controlEvent(ControlEvent theEvent) {
     } 
     else {
       currentTestRun--;
-      //setControllerValue();
+      setControllerValue();
       println(currentTestRun);
     }
     break;
@@ -221,7 +254,7 @@ void controlEvent(ControlEvent theEvent) {
     } 
     else {
       currentTestRun++;
-      //setControllerValue();
+      setControllerValue();
       println(currentTestRun);
     }
     break;
@@ -232,7 +265,6 @@ void controlEvent(ControlEvent theEvent) {
 
 void setControllerValue() {
   gui.setControllerValue(currentTestRun);
-
 }
 
 

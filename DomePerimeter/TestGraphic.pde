@@ -14,7 +14,7 @@ class TestGraphic {
   // Variables o manipulate the test file object.
   int transparency;
   int scale;
-  int rotation;
+  float rotation;
 
 
   /**
