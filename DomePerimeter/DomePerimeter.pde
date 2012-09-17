@@ -101,7 +101,25 @@ void keyPressed() {
       gui.setDomegridValue(1);
     }
     break;
-
+  
+  /* Rotate Left + */
+  case 'y':
+    testXml.testObject[currentTestRun].testGraphic[0].rotation++;
+    break;
+  /* Rotate Left - */
+  case 'x':
+    testXml.testObject[currentTestRun].testGraphic[0].rotation--;
+    break;
+    
+  /* Rotate Right + */
+  case 'n':
+    testXml.testObject[currentTestRun].testGraphic[2].rotation++;
+    break;
+  /* Rotate Right - */
+  case 'mw':
+    testXml.testObject[currentTestRun].testGraphic[2].rotation--;
+    break;
+  
   /* Next Run */
   case '9':
     if(currentTestRun >= testXml.testObject.length-1) {
@@ -116,11 +134,7 @@ void keyPressed() {
       currentTestRun--;
     }
     break;
-
-  default:
-    println("default key pressed");
-    break;
-  }
+  } /* End swithc */
 }
 
 
