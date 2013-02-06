@@ -1,3 +1,16 @@
+final static String GUI_BACKGROUND_R    = "BG R";
+final static String GUI_BACKGROUND_G    = "BG G";
+final static String GUI_BACKGROUND_B    = "BG B";
+final static String GUI_DOMEGRID        = "DOMEGRID";
+final static String GUI_TRANSPARENCY    = "TRANSPARENCY";
+final static String GUI_SCALE           = "SCALE";
+final static String GUI_ROTATE_LEFT     = "ROTATE_LEFT";
+final static String GUI_ROTATE_MIDDLE   = "ROTATE_MIDDLE";
+final static String GUI_ROTATE_RIGHT    = "ROTATE_RIGHT";
+final static String GUI_LATITUDE_DEGREE = "LATITUDE_DEGREE";
+final static String GUI_PREV            = "PREV";
+final static String GUI_NEXT            = "NEXT";
+
 /**
  * GUI
  */
