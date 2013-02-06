@@ -5,11 +5,12 @@
  * FH-Potsdam
  * University of Applied Science
  *
- * 
- * @processing-version   2.0b3
  * @author               Paul Vollmer
  * @modified             2012.09.15
  * @version              0.1.41a
+ *
+ * processing    version 2.0b3
+ * controlP5     version 2.0.4
  */
 
 import controlP5.*;
