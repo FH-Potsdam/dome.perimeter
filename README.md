@@ -2,7 +2,9 @@
 
 
 ## General Information
-The dome.perimeter was developed in collaboration with Prof. Klaus Dufke in the summer term 2012.
+The dome.perimeter was developed in collaboration with Prof. Klaus Dufke in the summer term 2012.  
+  
+FH-Potsdam, University of Applied Science
 
   
 **Current Version:**  

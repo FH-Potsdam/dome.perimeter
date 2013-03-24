@@ -21,21 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
-/**
- * Dome.Perimeter is developed by Prof. Dufke
- * Code by Paul Vollmer <paul.vollmer@fh-potsdam.de>
- * 
- * FH-Potsdam
- * University of Applied Science
- *
- * @author               Paul Vollmer
- * @modified             2012.09.15
- * @version              0.1.41a
- *
- * processing    version 2.0b8
- * controlP5     version 2.0.4
- */
 
 import controlP5.*;
 
@@ -96,7 +81,7 @@ void draw() {
     ellipse(width/2, height/2, width, height);
   }
 
-  /* Typo für gui beschreibung, test ergebniss etc. */
+  /* Typo for gui description, test result... */
   fill(255);
   textFont(font);
   text("BACKGROUND COLOR:", 10, 20);

@@ -40,7 +40,6 @@ class AppSettingsXml {
   int latitudeDegree;
   String testFile;
 
-
   /**
    * Constuctor
    */
@@ -51,7 +50,6 @@ class AppSettingsXml {
     latitudeDegree = 10;
   }
 
-
   /**
    * load
    *
@@ -60,7 +58,7 @@ class AppSettingsXml {
   void load(String file) {
     DEBUGINFO("load()");
     
-    /* check if the file exist */
+    /* Check if the file exist */
     File f = new File(dataPath(file));
     if (f.exists()) {
       DEBUGINFO("File exist");
@@ -72,13 +70,12 @@ class AppSettingsXml {
       /* Read the xml content */
       read(xml);
     }
-    /* if no file exist... */
+    /* If no file exist... */
     else {
       DEBUGINFO("File does not exist");
       setDefault();
     } /* End if file exists */
   }
-  
   
   /** 
    * setup
@@ -94,7 +91,6 @@ class AppSettingsXml {
     smooth();
   }
   
-  
   /**
    * read
    */
@@ -102,7 +98,6 @@ class AppSettingsXml {
     DEBUGINFO("read()");
     
     /* Set the application variables from xml content. */
-    
     XML[] displayInDomeTag = xml.getChildren("displayInDome");
     /* If displayInDome tag exists */
     if(displayInDomeTag.length == 1) {
@@ -110,8 +105,9 @@ class AppSettingsXml {
         displayInDome = true;
      } else {
         displayInDome = false;
-      }
-    } else {
+     }
+    }
+    else {
       setDefault_displayInDome();
     }
 
