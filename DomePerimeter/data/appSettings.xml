@@ -40,6 +40,6 @@
   
   <!-- Here is the file name of the test XML. -->
   <!-- The test SVG, PNG files are linked at the test XML file. -->
-  <testFile>tests/dev_test.xml</testFile>
+  <testFile>tests/test_1.xml</testFile>
 
 </domePerimeter_settings>
