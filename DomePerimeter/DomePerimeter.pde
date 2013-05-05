@@ -177,6 +177,8 @@ void keyPressed() {
       currentTestRun--;
     }
     break;
+  case's':
+    saveFrame("dome_perimeter_####.png");
   } /* End swithc */
 }
 
