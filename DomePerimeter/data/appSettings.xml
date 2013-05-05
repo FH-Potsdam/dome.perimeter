@@ -23,7 +23,7 @@
 <!--                                                                               -->
 
 <?xml version="1.0"?>
-<domePerimeter_settings version="0.1.4d">
+<domePerimeter_settings version="0.1.41a">
   
   <!-- Mode in which the application should run? -->
   <displayInDome>false</displayInDome>
