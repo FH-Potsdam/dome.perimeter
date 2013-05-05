@@ -8,7 +8,7 @@ FH-Potsdam, University of Applied Science
 
   
 **Current Version:**  
-0.1.41a (stable and versioned using [semantic versioning](http://semver.org/))   
+0.1.42 (stable and versioned using [semantic versioning](http://semver.org/))   
   
 **Tested Platform:**  
 MacOS 10.6+  
@@ -28,6 +28,11 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 ## Changelog  
 A detailed changelog, intended for programmers.  
   
+0.1.42  
+- Add and update test xml files.
+- Add Makefile and processing.make submodule
+- Small changes at save image/sequence
+
 0.1.41a  
 - Fixed XML Processing 2.0 changes
 - Create git Repository  
