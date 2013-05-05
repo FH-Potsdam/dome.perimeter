@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--                                                                               -->
 <!-- dome.perimeter is released under the MIT License.                             -->
 <!--                                                                               -->
@@ -22,7 +23,6 @@
 <!-- THE SOFTWARE.                                                                 -->
 <!--                                                                               -->
 
-<?xml version="1.0" encoding="UTF-8"?>
 <domePerimeter version="0.1.41a">
 	<testSession name="erster test">
 		<test>
