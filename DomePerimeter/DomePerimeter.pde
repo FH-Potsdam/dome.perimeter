@@ -40,6 +40,9 @@ int currentTestRun = 0;
 PFont font;
 PImage domegrid;
 
+// Save images
+boolean saveSequence = false;
+
 
 
 /**
@@ -91,6 +94,10 @@ void draw() {
 
   testXml.testObject[currentTestRun].display(appSettingsXml.latitudeDegree);
   //println(testXml.testObject.length);
+
+  if(saveSequence == true) {
+    saveFrame("dome_perimeter_####.png");
+  }
 }
 
 
@@ -177,9 +184,19 @@ void keyPressed() {
       currentTestRun--;
     }
     break;
+  /* Save a frame as png file */
   case's':
-    saveFrame("dome_perimeter_####.png");
-  } /* End swithc */
+    save("dome_perimeter_"+year()+day()+month()+"_"+hour()+minute()+second()+".png");
+    break;
+  /* Start saving a png sequence */
+  case'd':
+    saveSequence = true;
+    break;
+  /* Stop saving a png sequence */
+  case'f':
+    saveSequence = false;
+    break;
+  } /* End switch */
 }
 
 
