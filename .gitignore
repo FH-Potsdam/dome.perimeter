@@ -4,3 +4,7 @@
 # PROCESSING
 *build/
 *build-tmp/
+
+# PROCESSING:MAKE
+DomePerimeter/distribution/
+
