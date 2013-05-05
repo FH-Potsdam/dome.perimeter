@@ -25,6 +25,15 @@ controlP5 v2.0.4
 You can find a list of all known bugs at [GitHub](https://github.com/wrongentertainment/dome.perimeter/issues). Please report if you find an unknown bug.  
 
 
+## Development
+
+Clone and build this Project with running:
+
+    git clone git@github.com:WrongEntertainment/dome.perimeter.git
+    cd dome.perimeter
+    make export
+
+
 ## Changelog  
 A detailed changelog, intended for programmers.  
   
