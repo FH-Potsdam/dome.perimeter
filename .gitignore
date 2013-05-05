@@ -1,2 +1,6 @@
-
+# GENERAL FILES
 *.DS_Store
+
+# PROCESSING
+*build/
+*build-tmp/
