@@ -27,11 +27,13 @@ You can find a list of all known bugs at [GitHub](https://github.com/wrongentert
 
 ## Development
 
-Clone and build this Project with running:
+Clone and build this Project by running:
 
-    git clone git@github.com:WrongEntertainment/dome.perimeter.git
+    git clone https://github.com/WrongEntertainment/dome.perimeter.git
+    git submodule init
+    git submodule update
     cd dome.perimeter
-    make export
+    make run
 
 
 ## Changelog  
