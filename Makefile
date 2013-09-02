@@ -1,5 +1,5 @@
 #
-# Makefile for the Dome.Perimeter
+# Makefile for the dome.perimeter
 #
 # For this we're using processing.make
 #
