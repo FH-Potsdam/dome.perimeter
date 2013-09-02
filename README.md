@@ -22,14 +22,14 @@ Linux ???
 controlP5 v2.0.4  
 
 **Issues and Bugs**  
-You can find a list of all known bugs at [GitHub](https://github.com/wrongentertainment/dome.perimeter/issues). Please report if you find an unknown bug.  
+You can find a list of all known bugs at [GitHub](https://github.com/fh-potsdam/dome.perimeter/issues). Please report if you find an unknown bug.  
 
 
 ## Development
 
 Clone and build this Project by running:
 
-    git clone https://github.com/WrongEntertainment/dome.perimeter.git
+    git clone https://github.com/fh-potsdam/dome.perimeter.git
     git submodule init
     git submodule update
     cd dome.perimeter
@@ -50,11 +50,10 @@ A detailed changelog, intended for programmers.
   
   
 ## Author  
-dome.perimeter is developed by Paul Vollmer http://wrong-entertainment.com/  
-Check out for new release at https://github.com/wrongentertainment/dome.perimeter/  
+dome.perimeter is developed by Paul Vollmer  
+Check out for new release at https://github.com/fh-potsdam/dome.perimeter/  
   
 Mail: paul.vollmer@fh-potsdam.de  
-Url: http://www.wrong-entertainment.com  
 Github: http://www.github.com/wrongentertainment  
 
 
